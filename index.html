@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Limbo</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="./assets/css/bootstrap/bootstrap.min.css" />
+    <!-- font -->
+    <link
+      rel="stylesheet"
+      href="./assets/font/fontawesome-free-5.15.4-web/css/all.min.css"
+    />
+    <!-- custom -->
+    <link rel="stylesheet" href="./assets/css/index.css" />
+  </head>
+  <body
+    class="d-flex justify-content-end justify-content-lg-between flex-column-reverse flex-lg-row"
+  >
+    <!-- History Sidebar -->
+    <div class="history m-hide" id="m-con-history">
+      <div class="d-flex justify-content-between align-items-center d-lg-none">
+        <h3>History</h3>
+        <i
+          class="fa fa-window-close coloseIconHistory"
+          onclick="HideHistory()"
+        ></i>
+      </div>
+      <h3 class="d-none d-lg-flex">History</h3>
+      <div id="historyList"></div>
+    </div>
+
+    <!-- Main Game -->
+
+    <section class="m-con">
+      <div
+        class="container d-flex justify-content-between flex-lg-row flex-column"
+      >
+        <div class="config mr-lg-4 mb-2 mb-lg-0">
+          <div class="config-header">
+            <strong class="m-0 p-0">Balance:</strong>
+            <span class="balance" id="balance">$100.00</span>
+          </div>
+          <div
+            class="input-group d-flex flex-column justify-content-start mt-3 mt-lg-4"
+          >
+            <label for="multiplier" class="form-label">Bet Amount:</label>
+
+            <input
+              type="number"
+              id="betAmount"
+              min="0.01"
+              step="0.01"
+              value="0"
+            />
+            <div
+              class="w-100 d-flex justify-content-between align-items-center mt-2"
+            >
+              <button id="halfBtn">½</button>
+              <button id="doubleBtn">2×</button>
+            </div>
+          </div>
+          <div
+            class="d-flex justify-content-start flex-column input-group mt-2 pt-1 pt-lg-0"
+          >
+            <label for="multiplier" class="form-label">Payout:</label>
+            <input
+              type="number"
+              id="multiplier"
+              min="1"
+              max="100"
+              step="1"
+              value="2"
+            />
+          </div>
+
+          <div class="error mt-1" id="error"></div>
+          <button id="betBtn" class="bet-btn mt-2">Bet</button>
+        </div>
+
+        <div class="game mt-4 ml-0 p-lg-0 con-animation" id="conAnimation">
+          <div
+            class="recent-wins mt-lg-1 ml-lg-1 pt-lg-3 pl-lg-3 ml-lg-2"
+            id="recentWins"
+          ></div>
+          <div class="multiplier my-5 my-lg-0 pb-4 pt-2 py-lg-0">
+            <div class="position-relative" id="multiplierDisplay">0.00X</div>
+
+            <!-- <img src="./assets/img/roc-min.png" class="mb-lg-3" id="rocket" /> -->
+            <div id="rocket" class="mb-lg-3"></div>
+            <canvas id="stars"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Btn History -->
+    <button onclick="ShowHistory()" class="d-lg-none openIconHistory">
+      <i class="fa fa-history"></i>
+    </button>
+
+    <div
+      class="modal fade show"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="history m-0 p-0">
+          <div class="d-flex justify-content-between align-items-center">
+            <h3>History</h3>
+            <button
+              type="button"
+              class="close m-0 p-0"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="historyList"></div>
+        </div>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+
+    <audio id="sndLaunch" preload="auto">
+      <source src="./assets/track/movement.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="sndwin" preload="auto">
+      <source src="./assets/track/win.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="sndExplosion" preload="auto">
+      <source src="./assets/track/crash.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="sndReset" preload="auto">
+      <source src="assets/track/default-click.mp3" type="audio/mpeg" />
+    </audio>
+
+    <audio
+      id="bg-music"
+      src="./assets/track/music-bg.mp3"
+      loop
+      autoplay
+      preload="auto"
+    ></audio>
+    <!-- bg sound play -->
+    <script>
+      const music = document.getElementById("bg-music");
+      music.volume = 0.7;
+
+      function enableSound() {
+        music.muted = false;
+        music.play();
+        window.removeEventListener("click", enableSound);
+        window.removeEventListener("keydown", enableSound);
+      }
+      window.addEventListener("click", enableSound);
+      window.addEventListener("keydown", enableSound);
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") {
+          music.play().catch(() => {});
+        } else {
+          music.pause();
+        }
+      });
+    </script>
+
+    <script src="assets/js/index.js"></script>
+  </body>
+</html>
