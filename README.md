@@ -120,11 +120,11 @@ git clone https://github.com/ConDevTp/Limbo-GameBet-Stake.git
 cd Limbo-GameBet-Stake
 open index.html
 ```
+## 📄 License
 <br/>
 <div align="center">
 
-📄 License
-<br/>
-<strong> MIT © ConDev </strong> 
-</div>
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge&logo=appveyor&logoColor=white)](https://opensource.org/licenses/MIT)  
+**© ConDev** – All rights reserved.  
 
+</div>
