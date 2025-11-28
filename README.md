@@ -116,8 +116,8 @@ Designed with **smooth animations, responsive UI, real betting logic, and full c
 
 ## 🧩 Setup
 ```bash
-git clone https://github.com/ConDevTp/Limbo
-cd Limbo
+git clone https://github.com/ConDevTp/Limbo-GameBet-Stake.git
+cd Limbo-GameBet-Stake
 open index.html
 ```
 <br/>
